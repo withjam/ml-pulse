@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>ML Pulse</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="ml-pulse.css">
+  </head>
+  <body>
+    <header>
+      <h1>ML Pulse</h1>
+      <nav>
+        <button>File 1</button>
+        <button>File 2</button>
+        <button id="add_file">Add +</button>
+      </nav>
+    </header>
+    <aside>
+
+    </aside>
+    <main>
+      <section id="chart-occurences"></section>
+      <section id="chart-total-time"></section>
+      <section id="chart-elapsed"></section>
+    </main>
+    <footer>
+
+    </footer>
+    <section class="modal" id="add_file_container">
+      <form name="add_file" onSubmit="return addLogFile()">
+        <input type="file" name="log_file_path" multiple="true">
+        <button type="submit">Add File</button>
+      </form>
+    </section>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="ml-pulse.js" type="module"></script>
+  </body>
+</html>
