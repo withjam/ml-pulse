@@ -1,17 +1,13 @@
 import { elapsedChart } from './modules/chart/elapsed-chart.js';
-import { brushChart } from './modules/chart/elapsed_brush.js';
+import { scatterChart } from './modules/chart/scatter-chart.js';
 import { occurenceChart } from './modules/chart/occurence-chart.js';
-import { downsamplePlugin } from './modules/chart/downsample.js';
-
-const plugins = {
-  downsample: downsamplePlugin()
-}
 
 const file_reader = new Worker('workers/io/file-reader.js');
 const elapsed_regex = /[^\d]*([\d]*M)?([\d\.]*)S/;
 
 const sections = {
   occurence: document.getElementById('chart-occurences'),
+  misses: document.getElementById('chart-misses'),
   elapsed: document.getElementById('chart-elapsed')
 }
 
@@ -20,6 +16,7 @@ let charts = {};
 let filtered = {};
 let occurences = {};
 let incoming_files = 0;
+let treeMisses = [];
 
 function clearDashboard() {
   Options.values(sections).forEach(section => { section.innerHTML = '' } );
@@ -56,6 +53,10 @@ function reloadDashboard() {
       }
     }
   });
+
+  charts.misses = scatterChart(treeMisses, sections.misses);
+
+
 }
 
 file_reader.onmessage = (e) => {
@@ -65,8 +66,10 @@ file_reader.onmessage = (e) => {
     // pre-filter
     occurences = totals.reduce( (acc, o) => (acc[o.url] = (acc[o.url] || 0)+1, acc), {} );
     filtered = {};
+    treeMisses = [];
     Object.keys(occurences).forEach(key => {
       filtered[key] = totals.filter(line => line.url === key);
+      treeMisses.push({ name: key, data: filtered[key].filter(line => line.expandedTreeCacheMisses > line.expandedTreeCacheHits).map(line => [ line.time, line.expandedTreeCacheMisses ]) });
     });
     reloadDashboard();
   }

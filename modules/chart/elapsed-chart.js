@@ -1,8 +1,7 @@
 export function elapsedChart(data, container, config) {
-  console.log('elapsedChart', data);
   var options = {
     chart: {
-      type: 'area',
+      type: 'line',
       stacked: false,
       height: 350,
       animations: {
@@ -19,9 +18,14 @@ export function elapsedChart(data, container, config) {
     dataLabels: {
       enabled: false
     },
+    plotOptions: {
+      bar: {
+        horizontal: false
+      }
+    },
     series: [{
       name: config.name,
-      data: data
+      data: data.slice(0,200)
     }],
     title: {
       text: config.title,
@@ -47,12 +51,11 @@ export function elapsedChart(data, container, config) {
     xaxis: {
       type: 'datetime'
     },
-
     tooltip: {
       shared: false,
       y: {
         formatter: function (val) {
-          return parseFloat(val/60).toFixed(4) + ' minutes';
+          return val; //parseFloat(val/60).toFixed(4) + ' minutes';
         }
       }
     }
