@@ -1,5 +1,6 @@
 html {
   font-size: 125%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 html, body {
@@ -8,6 +9,127 @@ html, body {
   margin: 0;
 }
 
+header {
+  background-color: #29333d;
+  display: flex;
+  color: #fff;
+  align-items: center;
+}
+
 h1 {
-  font-size: 1rem;
+  font-size: 1.5rem;
+  margin: 0.45em;
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 0.5rem;
+}
+
+nav * {
+  font-size: 0.75rem;
+}
+
+nav form {
+  margin: 0 0.5rem;
+}
+
+nav select {
+  background-color: #3b8ec2;
+  border-radius: 5px;
+  padding: 2em;
+  height: 2rem;
+  min-width: 8rem;
+  color: #FFF;
+  border: none;
+}
+
+nav .add {
+  background-color: lightgreen;
+  border: none;
+  height: 2rem;
+  width: 8rem;
+  border-radius: 6px;
+  color: darkgreen;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal {
+  position: fixed;
+  background-color: rgba(0,0,0,0.75);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal form {
+  display: block;
+  position: fixed;
+  width: 46%;
+  height: 46%;
+  background-color: #FFF;
+  top: 20%;
+  left: 25%;
+  border-radius: 6px;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+  padding: 2rem;
+}
+
+.modal form * { text-align: center; }
+
+.modal form #browse {
+  opacity: 0;
+}
+
+.modal form .submit {
+  background-color: lightgreen;
+  border: solid 1px darkgreen;
+  height: 2rem;
+  width: 8rem;
+  border-radius: 6px;
+  color: darkgreen;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin: auto;
+}
+
+.modal form .drop-area {
+  border:dashed 1px #aaa;
+  flex: 1;
+  padding: 2rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-flow: column;
+  color: #676767;
+}
+
+.modal .drop-area .browse {
+  background-color: #FFF;
+  border: solid #3b8ec2 1px;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: #3b8ec2;
+  font-size: 0.75rem;
+}
+
+.modal .drop-area .or {
+  margin: 1.25rem 0;
+  font-size: 0.85em;
+}
+
+.modal .drop-area .file-list {
+  position: absolute;
+  bottom: 5px;
+
 }

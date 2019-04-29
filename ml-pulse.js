@@ -79,8 +79,10 @@ file_reader.onerror = (e) => {
   console.log('file read error', e);
 }
 
-window.addLogFile = () => {
-  let files = document.querySelector('input[name=log_file_path]').files;
+const file_inp = document.querySelector('input[name=log_file_path]');
+let files = [];
+
+const addLogFiles = () => {
   console.log('read log file', files);
   if (files && files.length) {
     incoming_files += files.length;
@@ -90,4 +92,20 @@ window.addLogFile = () => {
   Apex.colors = ['#45489b', '#4e51b0', '#676abb', '#8083c6', '#9a9cd2']
 
   return false;
+}
+
+const inpChange = () => {
+  files = files.concat(file_inp.files);
+}
+
+const dropArea = document.querySelector('.drop_area');
+dropArea.addEventListener('drop', handleDrop, false);
+file_inp.addEventListener('change',inpChange, false);
+dropArea.addEventListener('submit', addLogFiles, false);
+
+function handleDrop(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  let dt = e.dataTransfer
+  files = files.concat(dt.files);
 }

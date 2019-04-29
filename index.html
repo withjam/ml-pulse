@@ -6,11 +6,17 @@
   </head>
   <body>
     <header>
-      <h1>ML Pulse</h1>
+      <caption id="logo"><img src="icon4.png"  width=60 height=60/></caption>
+      <h1>Pulse</h1>
       <nav>
-        <button>File 1</button>
-        <button>File 2</button>
-        <button id="add_file">Add +</button>
+        <form name="filter_form">
+          <select name="files">
+            <option selected value="*">All Files</option>
+            <option>File 1</option>
+            <option>File 2</option>
+          </select>
+        </form>
+        <button id="add_file" class="add">+ Upload Log File</button>
       </nav>
     </header>
     <aside>
@@ -26,9 +32,17 @@
 
     </footer>
     <section class="modal" id="add_file_container">
-      <form name="add_file" onSubmit="return addLogFile()">
-        <input type="file" name="log_file_path" multiple="true">
-        <button type="submit">Add File</button>
+      <form name="add_file" onSubmit="return false">
+        <section class="drop_area">
+          <label>Drag & Drop</label>
+          <span class="or">or</span>
+          <label class="browse" name="browse_files" for="browse">Browse Files</label>
+          <ul id="upload_list">
+
+          </ul>
+        </section>
+        <input type="file" name="log_file_path" multiple="true" id="browse">
+        <button type="submit" class="submit">Done</button>
       </form>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
