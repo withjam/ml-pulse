@@ -51,11 +51,15 @@ nav .add {
   background-color: lightgreen;
   border: none;
   height: 2rem;
-  width: 8rem;
+  width: 9rem;
   border-radius: 6px;
   color: darkgreen;
   cursor: pointer;
   font-weight: bold;
+}
+
+nav .add i {
+  margin-right: 0.5em;
 }
 
 .modal {
@@ -65,15 +69,20 @@ nav .add {
   left: 0;
   bottom: 0;
   right: 0;
+  display: none;
+}
+
+.modal.shown {
+  display: block;
 }
 
 .modal form {
   display: block;
   position: fixed;
   width: 46%;
-  height: 46%;
+  height: 60%;
   background-color: #FFF;
-  top: 20%;
+  top: 13%;
   left: 25%;
   border-radius: 6px;
   display: flex;
@@ -99,12 +108,13 @@ nav .add {
   font-weight: bold;
   font-size: 0.75rem;
   margin: auto;
+  flex: 0 0 2rem;
 }
 
 .modal form .drop-area {
   border:dashed 1px #aaa;
   flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -112,6 +122,12 @@ nav .add {
   position: relative;
   flex-flow: column;
   color: #676767;
+  flex: 1 0 45%;
+}
+
+.drop-area.dropping {
+  background-color: #EEF;
+  border-color: lightblue;
 }
 
 .modal .drop-area .browse {
@@ -131,5 +147,19 @@ nav .add {
 .modal .drop-area .file-list {
   position: absolute;
   bottom: 5px;
+}
 
+.modal #upload-list {
+  display: flex;
+  font-size: 0.7rem;
+  list-style: none;
+  padding: 0;
+  flex:0 1 25%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.modal #upload-list li {
+  flex: 0 0 45%;
+  text-align: left;
 }

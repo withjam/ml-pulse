@@ -11,12 +11,10 @@
       <nav>
         <form name="filter_form">
           <select name="files">
-            <option selected value="*">All Files</option>
-            <option>File 1</option>
-            <option>File 2</option>
+            <option value="*">-- no files --</option>
           </select>
         </form>
-        <button id="add_file" class="add">+ Upload Log File</button>
+        <button id="add_file" class="add"><i class="fas fa-upload"></i> Upload Log File</button>
       </nav>
     </header>
     <aside>
@@ -31,16 +29,14 @@
     <footer>
 
     </footer>
-    <section class="modal" id="add_file_container">
+    <section class="modal shown" id="add_file_container">
       <form name="add_file" onSubmit="return false">
-        <section class="drop_area">
+        <section class="drop-area">
           <label>Drag & Drop</label>
           <span class="or">or</span>
           <label class="browse" name="browse_files" for="browse">Browse Files</label>
-          <ul id="upload_list">
-
-          </ul>
         </section>
+        <ul id="upload-list"></ul>
         <input type="file" name="log_file_path" multiple="true" id="browse">
         <button type="submit" class="submit">Done</button>
       </form>
