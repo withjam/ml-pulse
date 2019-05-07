@@ -40,7 +40,7 @@ let uploads = [];
 let selectedFile;
 
 function clearDashboard() {
-  Options.values(sections).forEach(section => { section.innerHTML = '' } );
+  Object.values(sections).forEach(section => { section.innerHTML = '' } );
 }
 
 function selectUrl(url) { 
@@ -59,13 +59,21 @@ function selectUrl(url) {
     ];
   });
   console.log('elapsed', elapsed.length, elapsed[0]);
-  charts.elapsed = elapsedChart(elapsed, sections.elapsed, { name: url, title: url });
+  charts.elapsed = elapsedChart(elapsed, sections.elapsed, { name: url, title: 'Elapsed Time: '+ url });
 }
 
-function reloadDashboard() {
-  console.log('reload dashboard', filtered);
+function reduceOccurences(acc, o) {
+  acc[o.url] = (acc[o.url] || 0)+1;
+  return acc;
+}
 
-  charts.occurences = occurenceChart(occurences, sections.occurence, {
+function renderDashboard() {
+  console.log('render dashboard', filtered);
+  clearDashboard();
+
+  const collection = selectedFile ? totals.filter(line => line._from_file === selectedFile) : totals;
+
+  charts.occurences = occurenceChart(collection.reduce(reduceOccurences, {}), sections.occurence, {
     events: {
       dataPointSelection: (event, context, data) => {
         console.log('dataPointSelection', data.w.config.labels, data.dataPointIndex);
@@ -82,14 +90,14 @@ file_reader.onmessage = (e) => {
   incoming_files--;
   if (!incoming_files) { 
     // pre-filter
-    occurences = totals.reduce( (acc, o) => (acc[o.url] = (acc[o.url] || 0)+1, acc), {} );
+    occurences = totals.reduce( reduceOccurences, {} );
     filtered = {};
     treeMisses = [];
     Object.keys(occurences).forEach(key => {
       filtered[key] = totals.filter(line => line.url === key);
       treeMisses.push({ name: key, data: filtered[key].filter(line => line.expandedTreeCacheMisses > line.expandedTreeCacheHits).map(line => [ line.time, line.expandedTreeCacheMisses ]) });
     });
-    reloadDashboard();
+    renderDashboard();
   }
 }
 
@@ -160,4 +168,5 @@ function filterSelectedFile() {
     // rerender the charts
   }
   console.log('selectedFile', selectedFile);
+  renderDashboard();
 }

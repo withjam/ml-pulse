@@ -9,7 +9,7 @@ html, body {
   margin: 0;
 }
 
-header {
+#header {
   background-color: #29333d;
   display: flex;
   color: #fff;

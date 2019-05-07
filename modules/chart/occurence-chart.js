@@ -3,6 +3,7 @@ export function occurenceChart(data, container, config) {
   var options = {
     chart: {
         width: '33%',
+        height: 350,
         type: 'pie',
         events: config.events
     },
@@ -11,6 +12,12 @@ export function occurenceChart(data, container, config) {
       monochrome: {
           enabled: true,
           color: '#45489b'
+      }
+    },
+    title: {
+      text: 'Total Occurences',
+      style: {
+        fontSize: '18px'
       }
     },
     tooltip: {

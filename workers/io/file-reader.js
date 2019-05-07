@@ -16,7 +16,7 @@ self.addEventListener('message', function(e) {
     lines.forEach(line => {
       try {
         parsed = JSON.parse(line);
-        parsed.file = file.name;
+        parsed._from_file = file.name;
         json.push(parsed);
       } catch(ex) {
         console.log('could not parse log line', ex);

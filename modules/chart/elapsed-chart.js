@@ -25,11 +25,12 @@ export function elapsedChart(data, container, config) {
     },
     series: [{
       name: config.name,
-      data: data.slice(0,200)
+      data: data.slice(0,1000)
     }],
     title: {
       text: config.title,
-      align: 'left'
+      align: 'left',
+      fontSize: '18px'
     },
     yaxis: {
       labels: {
